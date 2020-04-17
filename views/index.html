@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Salon Application</title>
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/Salon.css" rel="stylesheet">
+</head>
+
+<body>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+		<div class="container">	<a class="navbar-brand" href="#">Salon App</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">	<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="#">About</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-left">
+				<h1 class="mt-5">Welcome to Jnails Beauty</h1>
+				<p class="lead">Select Enter your name and appointment</p>
+			</div>
+			<div id="results" class="col-lg-8 text-center order-3"></div>
+			<div class="col-lg-4 text-center order-2">
+				<form enctype="application/json">
+					<div class="form-group">
+						<select class="form-control" name="sec_n" id="day">
+							<option value="0">Monday</option>
+							<option value="1">Tuesday</option>
+							<option value="2">Wednesday</option>
+							<option value="3">Thursday</option>
+                            <option value="4">Friday</option>
+                            
+						</select>
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="text" name="Client" id="cname" placeholder="client">
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="text" name="Time" placeholder="time"
+						id= "time"
+						>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block"  id="send"		>Submit</button>
+				</form>
+                    <button id="delete" class="btn btn-block btn-danger">Delete</button>
+                    <p class="text-muted">To delete an entree, click the required row first</p>
+			</div>
+			<div style="position: absolute; margin-left: 600px; width: max-content; z-index: 1000;">
+				<table  id = 'tableapp'>
+					
+					<tr>
+						<th>Jnails And Beauty</th>
+						<th></th>
+					</tr>
+					<tr>
+							<th>Client</th>
+							<th>Time</th>
+					</tr>
+					<tr class = 'mon'>
+						<th>Monday</th>
+						<th></th>
+					</tr>
+					<tr class = 'tue'>
+						<th>Tuesday</th>
+						<th></th>
+					</tr>
+					<tr class = 'wed'>
+						<th>Wednesday</th>
+						<th></th>
+					</tr>
+					<tr class = 'thur'>
+						<th>Thursday</th>
+						<th></th>
+					</tr>
+					<tr class = 'fri'>
+						<th>Friday</th>
+						<th></th>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<footer class="footer">
+		<div class="container">	<span class="text-muted">&copy; 2019</span>
+		</div>
+	</footer>
+	<!-- Bootstrap core JavaScript -->
+	<script src="jquery/jquery.min.js"></script>
+	<!-- <script src="jquery/table.js"></script> -->
+	<!-- <script src="js/bootstrap.min.js"></script> -->
+	
+	
+	<script >
+
+let id = '';
+
+// add appointment
+$('#send').click(function(e){
+ e.preventDefault()
+	var cname = $('#cname').val()
+	var time = $('#time').val()
+	var day  = $('#day').val()
+
+	let appointment = {
+		"client" : `${cname}`,
+		"time" : `${time}`,
+		"day" : `${day}`
+	}
+	$.post('http://localhost:3000/appointment',
+	appointment
+	);
+	location.reload()
+});
+
+//load all the appointment
+$(document).ready(function(){
+
+	$.get('http://localhost:3000/appointment', function(res){
+		res.map((record)=>{
+			
+			const html = `<tr id = ${record._id} class= 'rower'><td>${record.client}</td>
+			<td>${record.time}</td></tr>`
+
+			if(record.day==0){
+				$('.mon').after(html)
+			}
+			if(record.day==1){
+				$('.tue').after(html)
+			}
+			if(record.day==2){
+				$('.wed').after(html)
+			}
+			if(record.day==3){
+				$('.thur').after(html)
+			}
+			if(record.day==4){
+				$('.fri').after(html)
+			}
+			
+		})
+	})
+})
+
+
+// select any appointment
+$(document).on('click', 'tr.rower', function () {
+	$(".selected").removeClass("selected");
+     $(this).closest('tr').addClass("selected");
+		var element = $(this).closest('tr').attr('id');
+		
+		id = element;
+ });
+
+ $(document).on('click', '#delete', function () {
+	$.post(`http://localhost:3000/appointment/${id}`, ''
+	);
+	location.reload()
+ })
+
+	</script>
+</body>
+
+</html>

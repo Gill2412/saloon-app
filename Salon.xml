@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Appointments>
+  <Days name="Monday"/>
+  <Days name="Tuesday">
+    <Details service="spray-tan">
+      <Client>Abdllah</Client>
+      <Time>11:00</Time>
+    </Details>
+    <Details>
+      <Client>hamayun</Client>
+      <Time>dsafda</Time>
+    </Details>
+    <Details>
+      <Client>saad</Client>
+      <Time>hello</Time>
+    </Details>
+    <Details>
+      <Client>bushra</Client>
+      <Time>14:20</Time>
+    </Details>
+  </Days>
+  <Days name="Wednesday">
+    <Details service="threading">
+      <Client>Ana</Client>
+      <Time>08:00</Time>
+    </Details>
+    <Details service="Nails">
+      <Client>Kim</Client>
+      <Time>10:00</Time>
+    </Details>
+    <Details service="makeup">
+      <Client>Andy</Client>
+      <Time>14:00</Time>
+    </Details>
+    <Details>
+      <Client>jjj</Client>
+      <Time>23:00</Time>
+    </Details>
+    <Details>
+      <Client>hamayun</Client>
+      <Time>12:50</Time>
+    </Details>
+    <Details>
+      <Client>hamayun</Client>
+      <Time>12:50</Time>
+    </Details>
+  </Days>
+  <Days name="Thursday">
+    <Details service="waxing">
+      <Client>Lee</Client>
+      <Time>09:00</Time>
+    </Details>
+    <Details service="massage">
+      <Client>Mia</Client>
+      <Time>13:00</Time>
+    </Details>
+    <Details>
+      <Client>saad</Client>
+      <Time>14:20</Time>
+    </Details>
+  </Days>
+  <Days name="Friday">
+    <Details service="Manicure">
+      <Client>Majid</Client>
+      <Time>09:00</Time>
+    </Details>
+    <Details service="makeup">
+      <Client>Bains</Client>
+      <Time>13:00</Time>
+    </Details>
+    <Details service="spray-tan">
+      <Client>Sidu</Client>
+      <Time>15:00</Time>
+    </Details>
+  </Days>
+</Appointments>

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const db = require('./config')
-mongoose.connect('mongodb://127.0.0.1:27017/salon-api',{
+mongoose.connect(db.mongoURI,{
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
